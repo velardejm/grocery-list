@@ -1,0 +1,16 @@
+th {
+    padding-left: 10px;
+}
+
+a {
+    color: inherit;
+}
+
+#items-table {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#add-pantry-item {
+    text-align: right;
+}
