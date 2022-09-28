@@ -1,7 +1,7 @@
 import React from "react";
 
-function Dialog({show, dialogMessage, dialogYes, dialogNo, yesFunction, noFunction}) {
-    if(show) {
+function Dialog({showDialog, dialogMessage, dialogYes, dialogNo, yesFunction, noFunction}) {
+    if(showDialog) {
         return (
             <div>
                 <p>{dialogMessage}</p>
