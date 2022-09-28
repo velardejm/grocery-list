@@ -27,7 +27,7 @@ function AddItem({ addPantryItem, pantryItems }) {
     }, []);
 
     useEffect(() => {
-        if(item && unit && qty && category) {
+        if (item && unit && qty && category) {
             setValid(true);
         } else {
             setValid(false);
@@ -35,23 +35,25 @@ function AddItem({ addPantryItem, pantryItems }) {
     }, [item, unit, qty, category]);
 
     // functions
-    // REFACTOR FROM HERE
-    const onItemInput = (e) => {
-        setItem(e.target.value);
-    }
+    const onFormInput = (e) => {
+        let inputId = e.target.id;
+        let inputValue = e.target.value;
 
-    const onUnitInput = (e) => {
-        setUnit(e.target.value);
+        switch (inputId) {
+            case "item-name":
+                setItem(inputValue);
+                break;
+            case "item-unit":
+                setUnit(inputValue);
+                break;
+            case "item-qty":
+                setQty(inputValue);
+                break;
+            case "item-category":
+                setCategory(inputValue);
+                break;
+        }
     }
-
-    const onQtyInput = (e) => {
-        setQty(e.target.value);
-    }
-
-    const onCategoryInput = (e) => {
-        setCategory(e.target.value);
-    }
-    // REFACTOR TO HERE
 
     const addItem = (e) => {
         e.preventDefault();
@@ -82,25 +84,25 @@ function AddItem({ addPantryItem, pantryItems }) {
                 <Dialog show={dialogVisible} dialogMessage={dialogMessage} dialogYes={dialogYes} dialogNo={dialogNo} yesFunction={addItem} noFunction={() => setDialogVisible(false)} />
             </div>
             <div>
-                {messageVisible ? <MessageBox addedItem={pantryItems[pantryItems.length - 1]}/> : null}
+                {messageVisible ? <MessageBox addedItem={pantryItems[pantryItems.length - 1]} /> : null}
             </div>
             <form className="ui form">
                 <div className="fields">
                     <div className="field">
                         <label>Item</label>
-                        <input required={true} ref={elRef} type="text" placeholder="Item" onChange={onItemInput} value={item} />
+                        <input id="item-name" required={true} ref={elRef} type="text" placeholder="Item" onChange={onFormInput} value={item} />
                     </div>
                     <div className="field">
                         <label>Unit</label>
-                        <input required={true} type="text" onChange={onUnitInput} value={unit} placeholder="Unit" />
+                        <input id="item-unit" required={true} type="text" onChange={onFormInput} value={unit} placeholder="Unit" />
                     </div>
                     <div className="field">
                         <label>Qty</label>
-                        <input required={true} type="number" placeholder="Qty" onChange={onQtyInput} value={qty} />
+                        <input id="item-qty" required={true} type="number" placeholder="Qty" onChange={onFormInput} value={qty} />
                     </div>
                     <div className="field">
                         <label>Category</label>
-                        <input required={true} type="text" placeholder="Category" onChange={onCategoryInput} value={category} />
+                        <input id="item-category" required={true} type="text" placeholder="Category" onChange={onFormInput} value={category} />
                     </div>
                     <div id='submit-item' className="field">
                         <button disabled={!valid} className="ui button" type="submit" onClick={showDialog}>Submit</button>
