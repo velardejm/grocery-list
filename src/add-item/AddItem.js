@@ -5,28 +5,28 @@ import './AddItem.css';
 
 function AddItem({ addPantryItem, pantryItems }) {
     // state hooks
-    let [newItem, setNewItem] = useState({
+    let blankNewItem = {
         name: '',
         qty: 0,
         unit: '',
         category: ''
-    });
+    };
+
+    let [newItem, setNewItem] = useState(blankNewItem);
     let [valid, setValid] = useState(false);
-    let [dialogVisible, setDialogVisible] = useState(false);
+    let [formVisible, setFormVisible] = useState(true);
+    let [addConfirmationVisible, setAddConfirmationVisible] = useState(false);
     let [messageVisible, setMessageVisible] = useState(false);
 
     // other variables
-    let dialogMessage = 'Add item to Pantry?';
+    // let {name, qty, unit} = pantryItems[pantryItems.length - 1];
+    let addItemPromptMessage = `Are you sure you want to add ${newItem.name} - ${newItem.qty} ${newItem.unit}`
+    let addItemSuccessMessage = `Succesfully added ${newItem.name} - ${newItem.qty} ${newItem.unit}`
 
     // refs
-    const elRef = useRef(null);
     const formRef = useRef(null);
 
     // effects
-    useEffect(() => {
-        elRef.current.focus();
-    }, []);
-
     useEffect(() => {
         let { name, unit, qty, category } = newItem;
         if (name && unit && qty && category) {
@@ -57,41 +57,52 @@ function AddItem({ addPantryItem, pantryItems }) {
             category: inputArr[3].value
         }
         addPantryItem(item);
-        setDialogVisible(false);
+        setAddConfirmationVisible(false);
         setMessageVisible(true);
         formRef.current.reset();
-        elRef.current.focus();
+        setNewItem(blankNewItem);
     }
 
-    const showDialog = (e) => {
+    const showConfirmation = (e) => {
         e.preventDefault();
-        setDialogVisible(true);
+        setAddConfirmationVisible(true);
+        setFormVisible(false);
+
     }
 
     const closeMessageBox = () => {
         setMessageVisible(false);
+        setFormVisible(true);
     }
 
     return (
         <div id='add-item-form'>
             <div>
-                <Dialog
-                    showDialog={dialogVisible}
-                    dialogMessage={dialogMessage}
-                    dialogYes={'Yes'}
-                    dialogNo={'No'} yesFunction={addItem}
-                    noFunction={() => setDialogVisible(false)} />
+                {addConfirmationVisible ?
+                    <Dialog
+                        dialogMessage={addItemPromptMessage}
+                        dialogYes={'Yes'}
+                        dialogNo={'No'} yesFunction={addItem}
+                        noFunction={() => setAddConfirmationVisible(false)} /> : null
+                }
             </div>
             <div>
-                <MessageBox showMessage={messageVisible} closeMessageBox={closeMessageBox} addedItem={pantryItems[pantryItems.length - 1]} />
+
+                {messageVisible ?
+                    <Dialog showDialog={messageVisible}
+                        dialogYes={'Ok'}
+                        yesFunction={closeMessageBox}
+                        dialogMessage={addItemSuccessMessage}
+                    /> : null}
+
             </div>
-            <form ref={formRef} className="ui form">
+            <form ref={formRef} className="ui form" hidden={!formVisible}>
                 <div className="fields">
                     <div className="field">
                         <label>Item</label>
                         <input id="item-name"
                             required={true}
-                            ref={elRef}
+                            autoFocus
                             type="text"
                             placeholder="Item"
                             onChange={onFormInput} />
@@ -119,11 +130,12 @@ function AddItem({ addPantryItem, pantryItems }) {
                             type="text" placeholder="Category" onChange={onFormInput} />
                     </div>
                     <div id='submit-item' className="field">
-                        <button disabled={!valid} className="ui button" type="submit" onClick={showDialog}>Submit</button>
+                        <button disabled={!valid} className="ui button" type="submit" onClick={showConfirmation}>Submit</button>
                     </div>
                 </div>
+                <p hidden={valid}>Note: Please complete all fields</p>
             </form>
-            <p hidden={valid}>Note: Please complete all fields</p>
+
         </div>
     );
 

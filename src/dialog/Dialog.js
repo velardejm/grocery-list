@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 
-function Dialog({showDialog, dialogMessage, dialogYes, dialogNo, yesFunction, noFunction}) {
-    if(showDialog) {
+function Dialog({ dialogMessage, dialogYes, dialogNo, yesFunction, noFunction, otherData }) {
+
+    console.log('dialog mounted');
+
+    let elRef = useRef(null);
+
+    useEffect(() => {
+        if (elRef.current) {
+            elRef.current.focus();
+        }
+    });
+
+
         return (
             <div>
                 <p>{dialogMessage}</p>
-                <button onClick={yesFunction}>{dialogYes}</button>
-                <button onClick={noFunction}>{dialogNo}</button>
+                {yesFunction ? <button ref={elRef} onClick={yesFunction}>{dialogYes}</button> : null}
+                {noFunction ? <button onClick={noFunction}>{dialogNo}</button> : null}
             </div>
-        )
-    } else {
-        return null;
-    }
+        );
+
 }
 
 export default Dialog;
