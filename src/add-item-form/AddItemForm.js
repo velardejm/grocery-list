@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-function AddItemForm({ addPantryItem, onFormSubmit, updateItemForAddition, resetFormAlert }) {
+function AddItemForm({ onFormSubmit }) {
 
     let blankNewItem = {
         name: '',
@@ -13,10 +13,7 @@ function AddItemForm({ addPantryItem, onFormSubmit, updateItemForAddition, reset
     let [valid, setValid] = useState(false);
     let [formHidden, setFormHidden] = useState(false);
 
-    const formRef = useRef(null);
-    const inputRef = useRef(null);
-    
-
+    const formRef = useRef(null); 
 
     useEffect(() => {
         let { name, unit, qty, category } = newItem;
@@ -26,10 +23,6 @@ function AddItemForm({ addPantryItem, onFormSubmit, updateItemForAddition, reset
             setValid(false);
         }
     }, [newItem]);
-
-    // useEffect(() => {
-    //     formRef.current.reset();
-    // }, [resetForm]);
 
     const onFormInput = (e) => {
         let inputArr = [...formRef.current.querySelectorAll("input")];
@@ -48,7 +41,6 @@ function AddItemForm({ addPantryItem, onFormSubmit, updateItemForAddition, reset
                     <div className="field">
                         <label>Item</label>
                         <input id="item-name"
-                            ref={inputRef}
                             required={true}
                             autoFocus
                             type="text"

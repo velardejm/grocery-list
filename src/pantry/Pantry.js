@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import './pantry.css';
 import CategoryGroup from '../category-group/CategoryGroup';
 import Modal from '../modal/Modal';
-import AddItem from '../add-item/AddItem';
 
-import AddItemRefactored from '../add-item-refactored/AddItemRefactored';
+import AddItem from '../add-item/AddItem';
 
 import { getCategories } from '../functions';
 
@@ -20,17 +19,9 @@ function Pantry({ pantryItems, addPantryItem }) {
 
 	return (
 		<div>
-
-			<AddItemRefactored pantryItems={pantryItems} addPantryItem={addPantryItem} />
-
-			<hr></hr>
-			<hr></hr>
-			<hr></hr>
-
 			<div className="App">
 				<Modal title="My Modal" onClose={() => setShow(false)} show={show}>
-					{/* <AddItem pantryItems={pantryItems} addPantryItem={addPantryItem} /> */}
-					<AddItemRefactored pantryItems={pantryItems} addPantryItem={addPantryItem} />
+					<AddItem pantryItems={pantryItems} addPantryItem={addPantryItem} />
 				</Modal>
 			</div>
 
