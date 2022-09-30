@@ -124,8 +124,6 @@ function AddItem({ addPantryItem, pantryItems }) {
                 </div>
             </form>
             <p hidden={valid}>Note: Please complete all fields</p>
-
-            <button>Close</button>
         </div>
     );
 

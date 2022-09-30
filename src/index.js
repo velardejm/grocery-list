@@ -5,20 +5,20 @@ import { pantryItems } from './data';
 
 class App extends React.Component {
     state = {
-        pantryItems: pantryItems,
-        showModal: false   //test purposes
+        pantryItems: pantryItems
     }
 
     addPantryItem = (item) => {
         let updatedPantryItems = this.state.pantryItems.slice();
         updatedPantryItems.push(item);
-        this.setState({pantryItems:updatedPantryItems});
+        this.setState({ pantryItems: updatedPantryItems });
     }
 
     render() {
         return (
             <div>
-                <Pantry pantryItems={this.state.pantryItems} addPantryItem={this.addPantryItem}/>
+                <Pantry pantryItems={this.state.pantryItems} addPantryItem={this.addPantryItem} />
+                <hr></hr>
             </div>
         );
     }
