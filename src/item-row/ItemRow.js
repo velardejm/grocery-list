@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Item({item}) {
+function ItemRow({item}) {
 	let {name, qty, unit} = item;
 	
 	return (
@@ -15,9 +15,4 @@ function Item({item}) {
 }
 
 
-export default Item;
-
-
-
-
-
+export default ItemRow;

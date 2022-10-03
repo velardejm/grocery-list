@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './pantry.css';
+import { getCategories } from '../functions';
+// COMPONENTS
 import CategoryGroup from '../category-group/CategoryGroup';
 import Modal from '../modal/Modal';
-
 import AddItem from '../add-item/AddItem';
 
-import { getCategories } from '../functions';
 
 
 function Pantry({ pantryItems, addPantryItem }) {

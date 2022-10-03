@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
-import Item from '../item-row/ItemRow';
-
 import {capitalize} from '../functions';
+// COMPONENTS
+import ItemRow from '../item-row/ItemRow';
 
-function CategoryRow({ pantryItems, category }) {
+function CategoryGroup({ pantryItems, category }) {
 
 	let filteredItemsList = pantryItems.filter((item) => {
 		return item.category === category;
 	});
 
 	let itemsList = filteredItemsList.map((item) => {
-		return <Item key={item.name} item={item} />
+		return <ItemRow key={item.name} item={item} />
 	})
 
 
@@ -24,4 +24,4 @@ function CategoryRow({ pantryItems, category }) {
 
 }
 
-export default CategoryRow;
+export default CategoryGroup;

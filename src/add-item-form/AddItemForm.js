@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import {capitalize} from '../functions';
 
 function AddItemForm({ onFormSubmit }) {
 
@@ -27,10 +28,10 @@ function AddItemForm({ onFormSubmit }) {
     const onFormInput = (e) => {
         let inputArr = [...formRef.current.querySelectorAll("input")];
         setNewItem({
-            name: inputArr[0].value,
-            unit: inputArr[1].value,
+            name: capitalize(inputArr[0].value),
+            unit: capitalize(inputArr[1].value),
             qty: inputArr[2].value,
-            category: inputArr[3].value
+            category: inputArr[3].value.toLowerCase()
         });
     }
 

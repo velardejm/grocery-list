@@ -1,11 +1,11 @@
 const capitalize = function (word) {
-  let capitalized = word.charAt(0).toUpperCase() + word.slice(1);
+  let capitalized = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   return capitalized;
 }
 
 function getCategories(pantryItems) {
   let categoriesArray = pantryItems.map((item) => {
-    return item.category;
+    return item.category.toLowerCase();
   });
   return [...new Set(categoriesArray)].sort();
 }

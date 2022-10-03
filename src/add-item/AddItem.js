@@ -1,14 +1,24 @@
 import React, { useState, useRef } from 'react';
+import './AddItem.css';
+// COMPONENTS
 import Dialog from '../dialog/Dialog';
 import AddItemForm from '../add-item-form/AddItemForm';
-import './AddItem.css';
 
 function AddItem({ addPantryItem, pantryItems }) {
 
-    let [itemForAddition, setItemForAddition] = useState(null);
+    let blankNewItem = {
+        name: '',
+        qty: 0,
+        unit: '',
+        category: ''
+    };
+
+    let [itemForAddition, setItemForAddition] = useState(blankNewItem);
     let [formVisible, setFormVisible] = useState(true);
     let [addConfirmationVisible, setAddConfirmationVisible] = useState(false);
     let [messageVisible, setMessageVisible] = useState(false);
+
+    let { name, qty, unit } = itemForAddition;
 
     const onFormSubmit = (e, item) => {
         e.preventDefault();
@@ -18,7 +28,6 @@ function AddItem({ addPantryItem, pantryItems }) {
 
     const addItem = (e) => {
         addPantryItem(itemForAddition);
-        console.log(pantryItems);
         setAddConfirmationVisible(false);
         setMessageVisible(true);
         setFormVisible(false);
@@ -36,7 +45,7 @@ function AddItem({ addPantryItem, pantryItems }) {
                 {addConfirmationVisible ?
                     <Dialog
                         dialogMessage={
-                            `Are you sure you want to add ${itemForAddition.name} - ${itemForAddition.qty} ${itemForAddition.unit}`
+                            `Are you sure you want to add ${name} - ${qty} ${unit}`
                         }
                         dialogYes={'Yes'}
                         dialogNo={'No'}
@@ -44,21 +53,20 @@ function AddItem({ addPantryItem, pantryItems }) {
                         noFunction={() => setAddConfirmationVisible(false)} /> : null
                 }
             </div>
+
             <div>
 
                 {messageVisible ?
                     <Dialog showDialog={messageVisible}
                         dialogYes={'Ok'}
                         yesFunction={closeMessageBox}
-                        dialogMessage={`Successfully added ${itemForAddition.name} - ${itemForAddition.qty} ${itemForAddition.unit}`}
+                        dialogMessage={`Successfully added ${name} - ${qty} ${unit}`}
                     /> : null}
 
             </div>
 
-
             {formVisible ?
                 <AddItemForm
-                    addPantryItem={addPantryItem}
                     onFormSubmit={onFormSubmit} /> : null}
 
         </div>
