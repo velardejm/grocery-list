@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import {capitalize} from '../functions';
+import {capitalize} from '../resources/functions';
 // COMPONENTS
-import ItemRow from '../item-row/ItemRow';
+import ItemRow from './ItemRow';
 
 function CategoryGroup({ pantryItems, category }) {
 

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './AddItem.css';
 // COMPONENTS
-import Dialog from '../dialog/Dialog';
-import AddItemForm from '../add-item-form/AddItemForm';
+import Dialog from '../shared/Dialog';
+import AddItemForm from './AddItemForm';
 
 function AddItem({ addPantryItem, pantryItems }) {
 

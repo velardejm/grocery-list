@@ -1,8 +1,9 @@
 import React from "react";
-import { pantryItems } from './data';
-import { getCategories } from './functions';
+import { pantryItems } from './resources/data';
+
+
 // COMPONENTS
-import Pantry from './pantry/Pantry';
+import Pantry from "./pantry/Pantry";
 
 class App extends React.Component {
     state = {
@@ -18,8 +19,11 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <h2 style={{ textAlign: "center" }}>Pantry</h2>
                 <Pantry pantryItems={this.state.pantryItems} addPantryItem={this.addPantryItem} />
-                <hr></hr>
+
+                <h2 style={{ textAlign: "center" }}>Recipes</h2>
+                <Pantry pantryItems={this.state.pantryItems} addPantryItem={this.addPantryItem} />
             </div>
         );
     }

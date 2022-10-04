@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {capitalize} from '../functions';
+import {capitalize} from '../resources/functions';
 
 function AddItemForm({ onFormSubmit }) {
 

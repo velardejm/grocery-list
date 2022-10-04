@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './pantry.css';
-import { getCategories } from '../functions';
+import './Pantry.css';
+import { getCategories } from '../resources/functions';
 // COMPONENTS
-import CategoryGroup from '../category-group/CategoryGroup';
-import Modal from '../modal/Modal';
-import AddItem from '../add-item/AddItem';
+import CategoryGroup from './CategoryGroup';
+import Modal from '../shared/Modal';
+import AddItem from './AddItem';
 
 
 
