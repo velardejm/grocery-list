@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
 import './AddItem.css';
-// COMPONENTS
 import Dialog from '../shared/Dialog';
 import AddItemForm from './AddItemForm';
 
-function AddItem({ addPantryItem, pantryItems }) {
+function AddItem({ addPantryItem }) {
 
     let blankNewItem = {
         name: '',
@@ -16,7 +15,7 @@ function AddItem({ addPantryItem, pantryItems }) {
     let [itemForAddition, setItemForAddition] = useState(blankNewItem);
     let [formVisible, setFormVisible] = useState(true);
     let [addConfirmationVisible, setAddConfirmationVisible] = useState(false);
-    let [messageVisible, setMessageVisible] = useState(false);
+    let [successMessageVisible, setSuccessMessageVisible] = useState(false);
 
     let { name, qty, unit } = itemForAddition;
 
@@ -26,16 +25,16 @@ function AddItem({ addPantryItem, pantryItems }) {
         setAddConfirmationVisible(true);
     }
 
-    const addItem = (e) => {
+    const addItem = () => {
         addPantryItem(itemForAddition);
         setAddConfirmationVisible(false);
-        setMessageVisible(true);
+        setSuccessMessageVisible(true);
         setFormVisible(false);
 
     }
 
-    const closeMessageBox = () => {
-        setMessageVisible(false);
+    const closeSuccessMessageBox = () => {
+        setSuccessMessageVisible(false);
         setFormVisible(true);
     }
 
@@ -56,10 +55,10 @@ function AddItem({ addPantryItem, pantryItems }) {
 
             <div>
 
-                {messageVisible ?
-                    <Dialog showDialog={messageVisible}
+                {successMessageVisible ?
+                    <Dialog showDialog={successMessageVisible}
                         dialogYes={'Ok'}
-                        yesFunction={closeMessageBox}
+                        yesFunction={closeSuccessMessageBox}
                         dialogMessage={`Successfully added ${name} - ${qty} ${unit}`}
                     /> : null}
 

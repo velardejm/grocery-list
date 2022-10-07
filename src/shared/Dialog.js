@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 
 function Dialog({ dialogMessage, dialogYes, dialogNo, yesFunction, noFunction, otherData }) {
 
-    console.log('dialog mounted');
 
     let elRef = useRef(null);
 

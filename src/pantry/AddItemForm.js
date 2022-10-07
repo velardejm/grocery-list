@@ -73,7 +73,6 @@ function AddItemForm({ onFormSubmit }) {
                     <div id='submit-item' className="field">
                         <button disabled={!valid} className="ui button" type="submit" onClick={(e) => {
                             onFormSubmit(e, newItem);
-                            console.log('test');
                             setFormHidden(true);
                         }}>Submit</button>
                     </div>
